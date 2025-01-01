@@ -46,5 +46,10 @@ jobs:
         with:
           dotnet-version: ${{ env.DOTNET_CORE_VERSION }}
         # Setup the .NET SDK version specified in the environment variables
+      - name: Install Playwright Browsers
+        run: |
+          cd "${{ env.TEST_PATH }}"
+          pwsh bin/Debug/net8.0/playwright.ps1 install
+        # Install Playwright browsers required for tests
       - name: run tests
         run: dotnet test ${{ env.TEST_PATH }}
