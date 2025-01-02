@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using calculator.frontend.Models;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
 
 namespace calculator.frontend.Controllers
@@ -11,12 +12,11 @@ namespace calculator.frontend.Controllers
         }
         private string base_url =
             Environment.GetEnvironmentVariable("CALCULATOR_BACKEND_URL") ??
-            "https://pabloqr-calculadora-backend-uat.azurewebsites.net";
+            "https://localhost:7012";
         const string api = "api/Calculator";
-        private KeyValuePair<string,string> ExecuteOperation(string number)
+        private AttributeModel ExecuteOperation(string number)
         {
-            bool? raw_prime =  null;
-            bool? raw_odd = null;
+            AttributeModel model = new();
             var clientHandler = new HttpClientHandler();
             var client = new HttpClient(clientHandler);
             var url = $"{base_url}/api/Calculator/number_attribute?number={number}";
@@ -34,40 +34,22 @@ namespace calculator.frontend.Controllers
                 var odd = json["odd"];
                 if (prime != null)
                 {
-                    raw_prime = prime.Value<bool>();
+                    model.SetPrime(prime.Value<bool>());
                 }
                 if (odd != null)
                 {
-                    raw_odd = odd.Value<bool>();
+                    model.SetOdd(odd.Value<bool>());
                 }
+            }
 
-            }
-            var isPrime = "unknown";
-            if (raw_prime != null && raw_prime.Value)
-            {
-                isPrime = "Yes";
-            }
-            else if (raw_prime != null && !raw_prime.Value)
-            {
-                isPrime = "No";
-            }
-            var isOdd = "unknown";
-            if (raw_odd != null && raw_odd.Value)
-            {
-                isOdd = "Yes";
-            }
-            else if (raw_odd != null && !raw_odd.Value)
-            {
-                isOdd = "No";
-            }
-            return new KeyValuePair<string,string>(isPrime,isOdd);
+            return model;
         }
         [HttpPost]
         public ActionResult Index(string number)
         {
             var result = ExecuteOperation(number);
-            ViewBag.IsPrime = result.Key;
-            ViewBag.IsOdd = result.Value;
+            ViewBag.IsPrime = result.IsPrime();
+            ViewBag.IsOdd = result.IsOdd();
             return View();
         }
     }
