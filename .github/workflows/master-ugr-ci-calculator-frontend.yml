@@ -46,6 +46,8 @@ jobs:
         with:
           dotnet-version: ${{ env.DOTNET_CORE_VERSION }}
         # Setup the .NET SDK version specified in the environment variables
+      - name: Build
+        run: dotnet build ${{ env.TEST_PATH }} --configuration Debug
       - name: Install Playwright Browsers
         run: |
           cd "${{ env.TEST_PATH }}"
