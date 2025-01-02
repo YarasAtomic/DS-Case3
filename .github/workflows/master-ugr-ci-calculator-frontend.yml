@@ -49,7 +49,8 @@ jobs:
       - name: Install Playwright Browsers
         run: |
           cd "${{ env.TEST_PATH }}"
-          pwsh bin/Debug/net8.0/playwright.ps1 install
+          ls -la
+          pwsh bin/Debug/net8.0/playwright.ps1 install --with-deps
         # Install Playwright browsers required for tests
       - name: run tests
         run: dotnet test ${{ env.TEST_PATH }}
