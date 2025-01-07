@@ -12,7 +12,7 @@ namespace calculator.frontend.Controllers
         }
         private string base_url =
             Environment.GetEnvironmentVariable("CALCULATOR_BACKEND_URL") ??
-            "https://localhost:7012";
+            "https://pabloqr-calculadora-backend-uat.azurewebsites.net";
         const string api = "api/Calculator";
         private AttributeModel ExecuteOperation(string number)
         {
