@@ -1,14 +1,8 @@
-name: Build and deploy .NET Core application to Web App master-ugr-ci-frontend-uat
+name: Build frontend, run tests and more
 
 on:
   # Trigger the workflow manually or on pull requests to the 'uat' branch
   workflow_dispatch:
-  push:
-    branches:
-    - front-end
-  pull_request:
-    branches:
-    - dev
 
 env:
   # Environment variables for the workflow
@@ -18,7 +12,6 @@ env:
   DOTNET_CORE_VERSION: 8.0.x
   WORKING_DIRECTORY: master-ugr.calculator.front-end/calculator.frontend
   TEST_PATH: master-ugr.calculator.front-end/tests/calculator.frontend.tests
-  CALCULATOR_FRONTEND_URL: https://pabloqr-calculadora-frontend-uat.azurewebsites.net
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -40,17 +33,6 @@ jobs:
     - name: Build
       run: dotnet build "${{ env.WORKING_DIRECTORY }}" --configuration ${{ env.CONFIGURATION }} --no-restore
       # Build the .NET project in Release configuration without restoring dependencies
-
-    - name: Publish
-      run: dotnet publish "${{ env.WORKING_DIRECTORY }}" --configuration ${{ env.CONFIGURATION }} --no-build --output "${{ env.AZURE_WEBAPP_PACKAGE_PATH }}"
-      # Publish the .NET project to the specified output path without building
-
-    - name: Publish Artifacts
-      uses: actions/upload-artifact@v4
-      with:
-        name: webapp
-        path: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
-      # Upload the published artifacts for later use in the deploy job
   deploy:
     runs-on: ubuntu-latest
     needs: build
@@ -68,9 +50,7 @@ jobs:
         app-name: ${{ env.AZURE_WEBAPP_NAME }}
         package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
         publish-profile: ${{ secrets.MASTER_UGR_CI_FRONTEND_UAT_SPN }}
-        
-      # Deploy the application to the specified Azure Web App
-  test:
+  tests:
     runs-on: ubuntu-latest
     needs: deploy
     steps:
@@ -84,12 +64,8 @@ jobs:
         # Setup the .NET SDK version specified in the environment variables
       - name: Build
         run: dotnet build ${{ env.TEST_PATH }} --configuration Debug
-      - name : Install playwright
+      - name: Install Playwright Browsers
         run: pwsh ${{ env.TEST_PATH }}/bin/Debug/net8.0/playwright.ps1 install --with-deps
+        # Install Playwright browsers required for tests
       - name: run tests
-        # Run tests
         run: dotnet test ${{ env.TEST_PATH }}
- 
-    
-
-
