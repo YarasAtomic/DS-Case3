@@ -32,6 +32,7 @@ namespace calculator.frontend.Controllers
                 var json = JObject.Parse(body);
                 var prime = json["prime"];
                 var odd = json["odd"];
+                var sqrt = json["sqrt"];
                 if (prime != null)
                 {
                     model.SetPrime(prime.Value<bool>());
@@ -39,6 +40,10 @@ namespace calculator.frontend.Controllers
                 if (odd != null)
                 {
                     model.SetOdd(odd.Value<bool>());
+                }
+                if (sqrt != null)
+                {
+                    model.SetSqrt(sqrt.Value<double>());
                 }
             }
 
@@ -50,6 +55,7 @@ namespace calculator.frontend.Controllers
             var result = ExecuteOperation(number);
             ViewBag.IsPrime = result.IsPrime();
             ViewBag.IsOdd = result.IsOdd();
+            ViewBag.Sqrt = result.Sqrt();
             return View();
         }
     }
