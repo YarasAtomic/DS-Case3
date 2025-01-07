@@ -29,5 +29,10 @@ namespace calculator.lib
         {
             return number % 2 != 0;
         }
+
+        public static double Sqrt(int number)
+        {
+            return number < 0 ? double.NaN : Math.Round(Math.Sqrt(number),2);
+        }
     }
 }
