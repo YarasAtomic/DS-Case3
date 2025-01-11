@@ -10,44 +10,37 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 namespace calculator.frontend.tests.steps
 {
     [Binding]
-    public class OddNumberSteps
+    public class SqrtSteps
     {
         private readonly ScenarioContext _scenarioContext;
 
-        public OddNumberSteps(ScenarioContext scenarioContext)
+        public SqrtSteps(ScenarioContext scenarioContext)
         {
             _scenarioContext = scenarioContext;
         }
-        [Given(@"a number (.*)")]
-        public void GivenANumber(int number)
-        {
-            _scenarioContext.Add("number", number);
-        }
 
-        [When(@"I check if it is odd")]
-        public void WhenICheckIfItIsOdd()
+        [When(@"root of number (.*) is calculated")]
+        public void WhenRootIsCalculated(int number)
         {
             using (var client = new HttpClient())
             {
-                var number = _scenarioContext.Get<int>("number");
                 var urlBase = _scenarioContext.Get<string>("urlBase");
                 var url = $"{urlBase}/api/Calculator/";
-                var api_call = $"{url}number_attribute?number={number}";
+                var api_call = $"{url}sqrt?number={number}";
                 var response = client.GetAsync(api_call).Result;
                 response.EnsureSuccessStatusCode();
                 var responseBody = response.Content.ReadAsStringAsync().Result;
                 var jsonDocument = JsonDocument.Parse(responseBody);
-                var odd = jsonDocument.RootElement.GetProperty("odd").GetBoolean();
-                var prime = jsonDocument.RootElement.GetProperty("prime").GetBoolean();
-                _scenarioContext.Add("isOdd", odd);
+                var result = jsonDocument.RootElement.GetProperty("result").GetDouble();
+                _scenarioContext.Add("sqrt", result);
             }
         }
 
-        [Then(@"it should be odd (.*)")]
-        public async Task ThenItShouldBeOddTrue(bool isIt_boolean)
+        [Then(@"its square root is (.*)")]
+        public void ThenTheResultForItsSqrt(double sqrt_result)
         {
-            var isOdd = _scenarioContext.Get<bool>("isOdd");
-            Assert.Equal(isOdd, isIt_boolean);
+            var sqrt = _scenarioContext.Get<double>("sqrt");
+            Assert.Equal(sqrt, sqrt_result);
         }
     }
 }

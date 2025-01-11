@@ -3,6 +3,9 @@ name: Build and deploy .NET Core application to Web App master-ugr-ci-backend-ua
 on:
   # Trigger the workflow manually or on pull requests to the 'uat' branch
   workflow_dispatch:
+  push:
+    branches:
+    - back-end
   pull_request:
     branches:
     - dev
@@ -15,7 +18,7 @@ env:
   DOTNET_CORE_VERSION: 8.0.x
   WORKING_DIRECTORY: master-ugr.calculator.back-end/calculator.backend
   TEST_PATH: master-ugr.calculator.back-end/tests/calculator.backend.test
-  CALCULATOR_BACKEND_URL: https://pabloqr-calculadora-backend-uat.azurewebsites.net/
+  CALCULATOR_BACKEND_URL: https://pabloqr-calculadora-backend-uat.azurewebsites.net
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -81,7 +84,3 @@ jobs:
         # Setup the .NET SDK version specified in the environment variables
       - name: run tests
         run: dotnet test ${{ env.TEST_PATH }}
- 
-    
-
-
