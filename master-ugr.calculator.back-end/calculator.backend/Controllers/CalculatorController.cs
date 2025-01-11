@@ -1,4 +1,5 @@
 using calculator.lib;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CalculatorAPI.Controllers
@@ -40,6 +41,13 @@ namespace CalculatorAPI.Controllers
         {
             var is_prime = NumberAttributter.IsPrime(number);
             return Ok(new { result = is_prime });
+        }
+
+        [HttpGet("sqrt")]
+        public ActionResult<double> Sqrt([FromQuery] int number)
+        {
+            var sqrt = NumberAttributter.Sqrt(number);
+            return Ok(new { result = sqrt });
         }
 
         [HttpGet("number_attribute")]

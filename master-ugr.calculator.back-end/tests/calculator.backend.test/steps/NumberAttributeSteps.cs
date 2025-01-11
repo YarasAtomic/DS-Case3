@@ -57,7 +57,7 @@ namespace calculator.lib.test.steps
         }
 
         [Then(@"the result for its square root is (.*)")]
-        public void ThenTheResultOfItsSqrt(double resSqrt)
+        public void ThenTheResultForItsSqrt(double resSqrt)
         {
             var sqrt = _scenarioContext.Get<double>("sqrt");
             Assert.Equal(sqrt, resSqrt);
