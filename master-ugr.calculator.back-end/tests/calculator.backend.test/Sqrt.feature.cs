@@ -19,7 +19,7 @@ namespace calculator.backend.test
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.9.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public partial class NumberAttributeFeature : object, Xunit.IClassFixture<NumberAttributeFeature.FixtureData>, System.IDisposable
+    public partial class SqrtFeature : object, Xunit.IClassFixture<SqrtFeature.FixtureData>, System.IDisposable
     {
         
         private static TechTalk.SpecFlow.ITestRunner testRunner;
@@ -28,10 +28,10 @@ namespace calculator.backend.test
         
         private Xunit.Abstractions.ITestOutputHelper _testOutputHelper;
         
-#line 1 "NumberAttribute.feature"
+#line 1 "Sqrt.feature"
 #line hidden
         
-        public NumberAttributeFeature(NumberAttributeFeature.FixtureData fixtureData, calculator_backend_test_XUnitAssemblyFixture assemblyFixture, Xunit.Abstractions.ITestOutputHelper testOutputHelper)
+        public SqrtFeature(SqrtFeature.FixtureData fixtureData, calculator_backend_test_XUnitAssemblyFixture assemblyFixture, Xunit.Abstractions.ITestOutputHelper testOutputHelper)
         {
             this._testOutputHelper = testOutputHelper;
             this.TestInitialize();
@@ -40,7 +40,7 @@ namespace calculator.backend.test
         public static void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "", "Number Attribute", " I want to have a REST API which includes information\r\n about a number.", ProgrammingLanguage.CSharp, featureTags);
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "", "Sqrt", "\tAs Alice (the customer)\r\n\tI want to know a number\'s square root", ProgrammingLanguage.CSharp, featureTags);
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -80,26 +80,28 @@ namespace calculator.backend.test
             this.TestTearDown();
         }
         
-        [Xunit.SkippableTheoryAttribute(DisplayName="Checking several numbers")]
-        [Xunit.TraitAttribute("FeatureTitle", "Number Attribute")]
-        [Xunit.TraitAttribute("Description", "Checking several numbers")]
-        [Xunit.InlineDataAttribute("2", "true", "false", "1.41", new string[0])]
-        [Xunit.InlineDataAttribute("6", "false", "false", "2.45", new string[0])]
-        [Xunit.InlineDataAttribute("7", "true", "true", "2.65", new string[0])]
-        [Xunit.InlineDataAttribute("8", "false", "false", "2.83", new string[0])]
-        [Xunit.InlineDataAttribute("9", "false", "true", "3", new string[0])]
-        [Xunit.InlineDataAttribute("10", "false", "false", "3.16", new string[0])]
-        public void CheckingSeveralNumbers(string number, string prime, string odd, string sqrt, string[] exampleTags)
+        [Xunit.SkippableTheoryAttribute(DisplayName="Checking the square root of several numbers")]
+        [Xunit.TraitAttribute("FeatureTitle", "Sqrt")]
+        [Xunit.TraitAttribute("Description", "Checking the square root of several numbers")]
+        [Xunit.InlineDataAttribute("0", "0", new string[0])]
+        [Xunit.InlineDataAttribute("2", "1.41", new string[0])]
+        [Xunit.InlineDataAttribute("3", "1.73", new string[0])]
+        [Xunit.InlineDataAttribute("5", "2.24", new string[0])]
+        [Xunit.InlineDataAttribute("7", "2.65", new string[0])]
+        [Xunit.InlineDataAttribute("9", "3", new string[0])]
+        [Xunit.InlineDataAttribute("11", "3.32", new string[0])]
+        [Xunit.InlineDataAttribute("997", "31.58", new string[0])]
+        [Xunit.InlineDataAttribute("98689", "314.15", new string[0])]
+        [Xunit.InlineDataAttribute("86743", "294.52", new string[0])]
+        public void CheckingTheSquareRootOfSeveralNumbers(string number, string result, string[] exampleTags)
         {
             string[] tagsOfScenario = exampleTags;
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             argumentsOfScenario.Add("number", number);
-            argumentsOfScenario.Add("prime", prime);
-            argumentsOfScenario.Add("odd", odd);
-            argumentsOfScenario.Add("sqrt", sqrt);
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Checking several numbers", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 5
- this.ScenarioInitialize(scenarioInfo);
+            argumentsOfScenario.Add("result", result);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Checking the square root of several numbers", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 6
+this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
             {
@@ -108,17 +110,11 @@ namespace calculator.backend.test
             else
             {
                 this.ScenarioStart();
-#line 6
- testRunner.When(string.Format("number {0} is checked for multiple attributes", number), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line hidden
 #line 7
- testRunner.Then(string.Format("the answer to know whether is prime or not is {0}", prime), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.When(string.Format("root of number {0} is calculated", number), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 8
- testRunner.And(string.Format("the answer to know whether is odd or not is {0}", odd), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-#line 9
- testRunner.And(string.Format("the result for its square root is {0}", sqrt), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Then(string.Format("its square root is {0}", result), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -131,12 +127,12 @@ namespace calculator.backend.test
             
             public FixtureData()
             {
-                NumberAttributeFeature.FeatureSetup();
+                SqrtFeature.FeatureSetup();
             }
             
             void System.IDisposable.Dispose()
             {
-                NumberAttributeFeature.FeatureTearDown();
+                SqrtFeature.FeatureTearDown();
             }
         }
     }
