@@ -25,7 +25,7 @@ namespace calculator.frontend.tests.steps
             using (var client = new HttpClient())
             {
                 var urlBase = _scenarioContext.Get<string>("urlBase");
-                var url = $"{urlBase}api/Calculator/";
+                var url = $"{urlBase}/api/Calculator/";
                 var api_call = $"{url}sqrt?number={number}";
                 var response = client.GetAsync(api_call).Result;
                 response.EnsureSuccessStatusCode();

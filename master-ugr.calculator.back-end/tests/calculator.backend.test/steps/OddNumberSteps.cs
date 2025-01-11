@@ -31,7 +31,7 @@ namespace calculator.frontend.tests.steps
             {
                 var number = _scenarioContext.Get<int>("number");
                 var urlBase = _scenarioContext.Get<string>("urlBase");
-                var url = $"{urlBase}api/Calculator/";
+                var url = $"{urlBase}/api/Calculator/";
                 var api_call = $"{url}number_attribute?number={number}";
                 var response = client.GetAsync(api_call).Result;
                 response.EnsureSuccessStatusCode();
