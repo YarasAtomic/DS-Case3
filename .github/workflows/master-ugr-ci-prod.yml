@@ -23,6 +23,7 @@ env:
     WORKING_DIRECTORY_BACKEND: master-ugr.calculator.back-end/calculator.backend
     CALCULATOR_BACKEND_URL_UAT: https://pabloqr-calculadora-backend-uat.azurewebsites.net
     TEST_PATH_BACKEND: master-ugr.calculator.back-end/tests/calculator.backend.test
+    CALCULATOR_BACKEND_URL_PROD: https://pabloqr-calculadora-backend.azurewebsites.net
     # Library Domain
     TEST_PATH_LIB: master-ugr.calculator.lib/tests/calculator.lib.test
 
@@ -187,3 +188,4 @@ jobs:
           run: dotnet test ${{ env.TEST_PATH_FRONTEND }} --logger "console;verbosity=normal"
           env:
             CALCULATOR_FRONTEND_URL : ${{ env.CALCULATOR_FRONTEND_URL_PROD }}
+            CALCULATOR_BACKEND_URL : ${{ env.CALCULATOR_BACKEND_URL_PROD }}

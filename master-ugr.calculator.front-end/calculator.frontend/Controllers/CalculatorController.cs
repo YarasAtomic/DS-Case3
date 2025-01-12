@@ -22,6 +22,7 @@ namespace calculator.frontend.Controllers
             var clientHandler = new HttpClientHandler();
             var client = new HttpClient(clientHandler);
             var url = $"{base_url}/{api}/{operation}?a={num1}&b={num2}";
+            Console.WriteLine(url);
             var request = new HttpRequestMessage
             {
                 Method = HttpMethod.Get,
