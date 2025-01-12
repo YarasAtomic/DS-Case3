@@ -184,6 +184,6 @@ jobs:
           run: pwsh ${{ env.TEST_PATH_FRONTEND }}/bin/Debug/net8.0/playwright.ps1 install --with-deps
         - name: run tests
           # Run tests
-          run: dotnet test ${{ env.TEST_PATH_FRONTEND }}
+          run: dotnet test ${{ env.TEST_PATH_FRONTEND }} --logger "console;verbosity=normal"
           env:
             CALCULATOR_FRONTEND_URL : ${{ env.CALCULATOR_FRONTEND_URL_PROD }}
