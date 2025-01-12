@@ -25,29 +25,7 @@ namespace calculator.frontend.tests.steps
         {
             IPage page = _scenarioContext.Get<IPage>("page");
             var base_url = _scenarioContext.Get<string>("urlBase");
-            Console.WriteLine($"{base_url}/Calculator");
-            var response = await page.GotoAsync($"{base_url}/Calculator");
-
-            if (response != null)
-            {
-                Console.WriteLine($"Status: {response.Status}");
-                Console.WriteLine($"Status Text: {response.StatusText}");
-                Console.WriteLine($"URL: {response.Url}");
-
-                var headers = response.Headers;
-                foreach (var header in headers)
-                {
-                    Console.WriteLine($"Header: {header.Key} - Value: {header.Value}");
-                }
-
-                var body = await response.TextAsync();
-                Console.WriteLine($"Body: {body}");
-            }
-            else
-            {
-                Console.WriteLine("Response was null.");
-            }
-
+            await page.GotoAsync($"{base_url}/Calculator");
             await page.FillAsync("#firstNumber", number1.ToString());
         }
 
