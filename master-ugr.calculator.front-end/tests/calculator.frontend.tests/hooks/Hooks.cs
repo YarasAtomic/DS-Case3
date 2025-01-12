@@ -26,6 +26,7 @@ namespace calculator.frontend.tests.hooks
             });
             var context = await browser.NewContextAsync();
             var urlBase = Environment.GetEnvironmentVariable("CALCULATOR_FRONTEND_URL") ?? "https://localhost:7297";
+            Console.WriteLine(urlBase);
             _scenarioContext.Add("urlBase", urlBase);
             var page = await context.NewPageAsync();
             _scenarioContext.Add("page",page);

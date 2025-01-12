@@ -19,12 +19,16 @@ namespace calculator.frontend.tests.steps
         {
             _scenarioContext = scenarioContext;
         }
+
         [Given(@"the first number is (.*)")]
         public async Task GivenTheFirstNumberIs(int number1)
         {
             IPage page = _scenarioContext.Get<IPage>("page");
             var base_url = _scenarioContext.Get<string>("urlBase");
-            await page.GotoAsync($"{base_url}/Calculator");
+            Console.WriteLine($"{base_url}/Calculator");
+            var response = await page.GotoAsync($"{base_url}/Calculator");
+            Console.WriteLine("RESPONSE");
+            Console.WriteLine(response.ToString);
             await page.FillAsync("#firstNumber", number1.ToString());
         }
 
@@ -59,7 +63,6 @@ namespace calculator.frontend.tests.steps
             await page.ClickAsync("#calculateButton");
         }
 
-
         [When(@"I divide first number by second number")]
         public async Task WhenIDivideFirstNumberBySecondNumber()
         {
@@ -67,6 +70,7 @@ namespace calculator.frontend.tests.steps
             await page.SelectOptionAsync("#operation", "Divide");
             await page.ClickAsync("#calculateButton");
         }
+
         [Then(@"the result should be (.*)")]
         [Then(@"the result is (.*)")]
         [Then(@"the result shall be (.*)")]
@@ -76,8 +80,7 @@ namespace calculator.frontend.tests.steps
             var resultText = await page.InnerTextAsync("#result");
             var americanDouble = expectedResult.Replace(",",".");
             var latinDouble = expectedResult.Replace(".", ",");
-            var ok = expectedResult.Equals(americanDouble) || 
-                expectedResult.Equals(latinDouble);
+            var ok = expectedResult.Equals(americanDouble) || expectedResult.Equals(latinDouble);
             Assert.True(ok, $"expected {expectedResult} but actual {resultText}");
         }
     }
