@@ -6,7 +6,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using TechTalk.SpecFlow;
 
-namespace calculator.lib.test.steps
+namespace calculator.backend.test.steps
 {
     [Binding]
     public class PrimeNumberSteps
