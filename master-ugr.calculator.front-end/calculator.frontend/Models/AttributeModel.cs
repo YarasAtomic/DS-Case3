@@ -6,14 +6,19 @@
         string is_odd = "";
         string sqrt = "";
 
+        private static string BoolToString(bool value)
+        {
+            return value ? "Yes" : "No";
+        }
+
         public void SetPrime(bool prime)
         {
-            is_prime = prime ? "Yes" : "No";
+            is_prime = BoolToString(prime);
         }
 
         public void SetOdd(bool odd)
         {
-            is_odd = odd ? "Yes" : "No";
+            is_odd = BoolToString(odd);
         }
 
         public void SetSqrt(double sqrt)

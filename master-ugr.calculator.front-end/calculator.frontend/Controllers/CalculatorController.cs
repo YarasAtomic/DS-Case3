@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Globalization;
+using System.Reflection;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
 
 namespace calculator.frontend.Controllers
@@ -35,9 +37,11 @@ namespace calculator.frontend.Controllers
                 var result_json = json["result"];
                 if (result_json != null)
                 {
-                    result = result_json.Value<double>();
+                    var res = result_json.Value<string>();
+                    result = double.TryParse(res, NumberStyles.Number, CultureInfo.InvariantCulture, out double n) ? n : double.NaN;
                 }
             }
+
             return result;
         }
         [HttpPost]
