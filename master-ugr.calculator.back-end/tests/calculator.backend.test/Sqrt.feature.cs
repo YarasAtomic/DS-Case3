@@ -83,6 +83,7 @@ namespace calculator.backend.test
         [Xunit.SkippableTheoryAttribute(DisplayName="Checking the square root of several numbers")]
         [Xunit.TraitAttribute("FeatureTitle", "Sqrt")]
         [Xunit.TraitAttribute("Description", "Checking the square root of several numbers")]
+        [Xunit.InlineDataAttribute("-4", "NaN", new string[0])]
         [Xunit.InlineDataAttribute("0", "0", new string[0])]
         [Xunit.InlineDataAttribute("2", "1.41", new string[0])]
         [Xunit.InlineDataAttribute("3", "1.73", new string[0])]
