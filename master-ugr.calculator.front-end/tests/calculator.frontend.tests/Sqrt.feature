@@ -1,7 +1,6 @@
-﻿Feature: Sqrt
+Feature: Sqrt
 	As Alice (the customer)
 	I want to know a number's square root
-
 
 Scenario Outline: Checking the square root of several numbers
 	When root of number <number> is calculated

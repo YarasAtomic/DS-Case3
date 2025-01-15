@@ -9,7 +9,7 @@ using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.CommonModels;
 using static System.Net.WebRequestMethods;
 
-namespace calculator.lib.test.steps
+namespace calculator.backend.test.steps
 {
     [Binding]
     public class CalculatorSteps
@@ -39,23 +39,28 @@ namespace calculator.lib.test.steps
                 var urlBase = _scenarioContext.Get<string>("urlBase");
                 var firstNumber = _scenarioContext.Get<int>("firstNumber");
                 var secondNumber = _scenarioContext.Get<int>("secondNumber");
+
                 var url = $"{urlBase}/api/Calculator/";
                 var api_call = $"{url}{operation}?a={firstNumber}&b={secondNumber}";
                 var response = client.GetAsync(api_call).Result;
                 response.EnsureSuccessStatusCode();
                 var responseBody = response.Content.ReadAsStringAsync().Result;
+
                 var jsonDocument = JsonDocument.Parse(responseBody);
-                var result = jsonDocument.RootElement.GetProperty("result").GetDouble();
-                _scenarioContext.Add("result", result);
+                var result = jsonDocument.RootElement.GetProperty("result").GetString();
+
+                var res = double.TryParse(result, out double n) ? n : double.NaN;
+
+                _scenarioContext.Add("result", res);
             }
         }
 
         [When(@"the two numbers are added")]
-
         public void WhenTheTwoNumbersAreAdded()
         {
             ApiCall("add");
         }
+
         [When(@"I divide first number by second number")]
         public void WhenIDivideFirstNumberBySecondNumber()
         {

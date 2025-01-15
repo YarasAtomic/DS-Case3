@@ -9,7 +9,7 @@ using System.Xml.Linq;
 using TechTalk.SpecFlow;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
-namespace calculator.lib.test.steps
+namespace calculator.backend.test.steps
 {
     [Binding]
     public class NumberAttributeSteps
@@ -35,10 +35,13 @@ namespace calculator.lib.test.steps
                 var jsonDocument = JsonDocument.Parse(responseBody);
                 var odd = jsonDocument.RootElement.GetProperty("odd").GetBoolean();
                 var prime = jsonDocument.RootElement.GetProperty("prime").GetBoolean();
-                var sqrt = jsonDocument.RootElement.GetProperty("sqrt").GetDouble();
+                var sqrt = jsonDocument.RootElement.GetProperty("sqrt").GetString();
+
+                var res = double.TryParse(sqrt, out double n) ? n : double.NaN;
+
                 _scenarioContext.Add("isOdd", odd);
                 _scenarioContext.Add("isPrime", prime);
-                _scenarioContext.Add("sqrt", sqrt);
+                _scenarioContext.Add("sqrt", res);
             }
         }
 
@@ -46,7 +49,7 @@ namespace calculator.lib.test.steps
         public void ThenTheAnswerToKnowWhetherIsPrimeOrNotIsTrue(bool isIt)
         {
             var isPrime = _scenarioContext.Get<bool>("isPrime");
-            Assert.Equal(isPrime,isIt);
+            Assert.Equal(isPrime, isIt);
         }
 
         [Then(@"the answer to know whether is odd or not is (.*)")]

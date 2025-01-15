@@ -77,7 +77,7 @@ namespace calculator.frontend.tests.steps
             var resultText = await page.InnerTextAsync("#result");
             var americanDouble = expectedResult.Replace(",",".");
             var latinDouble = expectedResult.Replace(".", ",");
-            var ok = expectedResult.Equals(americanDouble) || expectedResult.Equals(latinDouble);
+            var ok = resultText.Equals(americanDouble) || resultText.Equals(latinDouble);
             Assert.True(ok, $"expected {expectedResult} but actual {resultText}");
         }
     }

@@ -10,7 +10,7 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace calculator.backend.test
+namespace calculator.frontend.tests
 {
     using TechTalk.SpecFlow;
     using System;
@@ -31,7 +31,7 @@ namespace calculator.backend.test
 #line 1 "Sqrt.feature"
 #line hidden
         
-        public SqrtFeature(SqrtFeature.FixtureData fixtureData, calculator_backend_test_XUnitAssemblyFixture assemblyFixture, Xunit.Abstractions.ITestOutputHelper testOutputHelper)
+        public SqrtFeature(SqrtFeature.FixtureData fixtureData, calculator_frontend_tests_XUnitAssemblyFixture assemblyFixture, Xunit.Abstractions.ITestOutputHelper testOutputHelper)
         {
             this._testOutputHelper = testOutputHelper;
             this.TestInitialize();
@@ -101,7 +101,7 @@ namespace calculator.backend.test
             argumentsOfScenario.Add("number", number);
             argumentsOfScenario.Add("result", result);
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Checking the square root of several numbers", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 6
+#line 5
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -111,10 +111,10 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 7
+#line 6
  testRunner.When(string.Format("root of number {0} is calculated", number), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 8
+#line 7
  testRunner.Then(string.Format("its square root is {0}", result), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using TechTalk.SpecFlow;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
-namespace calculator.frontend.tests.steps
+namespace calculator.backend.test.steps
 {
     [Binding]
     public class SqrtSteps
@@ -31,8 +31,11 @@ namespace calculator.frontend.tests.steps
                 response.EnsureSuccessStatusCode();
                 var responseBody = response.Content.ReadAsStringAsync().Result;
                 var jsonDocument = JsonDocument.Parse(responseBody);
-                var result = jsonDocument.RootElement.GetProperty("result").GetDouble();
-                _scenarioContext.Add("sqrt", result);
+                var result = jsonDocument.RootElement.GetProperty("result").GetString();
+
+                var res = double.TryParse(result, out double n) ? n : double.NaN;
+
+                _scenarioContext.Add("sqrt", res);
             }
         }
 
