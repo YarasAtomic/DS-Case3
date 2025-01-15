@@ -9,7 +9,7 @@ using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.CommonModels;
 using static System.Net.WebRequestMethods;
 
-namespace calculator.lib.test.steps
+namespace calculator.backend.test.steps
 {
     [Binding]
     public class CalculatorSteps
