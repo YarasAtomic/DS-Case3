@@ -1,4 +1,5 @@
-﻿using calculator.frontend.Models;
+﻿using System.Globalization;
+using calculator.frontend.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
 
@@ -43,7 +44,9 @@ namespace calculator.frontend.Controllers
                 }
                 if (sqrt != null)
                 {
-                    model.SetSqrt(sqrt.Value<double>());
+                    var res = sqrt.Value<string>();
+                    double sqrt_res = double.TryParse(res, NumberStyles.Number, CultureInfo.InvariantCulture, out double n) ? n : double.NaN;
+                    model.SetSqrt(sqrt_res);
                 }
             }
 

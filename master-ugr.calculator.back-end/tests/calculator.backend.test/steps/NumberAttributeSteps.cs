@@ -60,6 +60,7 @@ namespace calculator.lib.test.steps
         }
 
         [Then(@"the result for its square root is (.*)")]
+        [Then(@"its square root is (.*)")]
         public void ThenTheResultForItsSqrt(double resSqrt)
         {
             var sqrt = _scenarioContext.Get<double>("sqrt");
