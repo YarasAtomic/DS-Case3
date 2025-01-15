@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using TechTalk.SpecFlow;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
-namespace calculator.frontend.tests.steps
+namespace calculator.backend.test.steps
 {
     [Binding]
     public class SqrtSteps
